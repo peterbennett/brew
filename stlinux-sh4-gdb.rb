@@ -38,7 +38,12 @@ class StlinuxSh4Gdb < Formula
     url "https://bitbucket.org/elkton/brew-patches/raw/master/stlinux-sh4-gdb/0002-darwin-nested-functions-aren-t-enabled-by-default-so.patch"
     sha256 "b5670641d96df7ce3b980f15a8277061f87158c2dd848a1f854561dafe1c6612"
   end
-    
+
+  patch :p1 do
+    url "https://bitbucket.org/elkton/brew-patches/raw/master/stlinux-sh4-gdb/0003-fix-crap-code.c"
+    sha256 "e0862ac0f58dbb14600d8608d325981d9a85ea348c8d352b97c97bd3c9cc0b5f"
+  end
+
   def stdir
     Pathname.new("#{HOMEBREW_PREFIX}/opt/STM/STLinux-2.4/devkit/sh4/")
   end
