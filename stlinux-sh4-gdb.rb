@@ -75,6 +75,6 @@ class StlinuxSh4Gdb < Formula
   end
 
   test do
-    system bin/"gdb", bin/"gdb", "-configuration"
+    system "#{stdir}/bin/sh4-linux-gdb -v"
   end
 end
