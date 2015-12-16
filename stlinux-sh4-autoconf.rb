@@ -6,7 +6,6 @@ class StlinuxSh4Autoconf < Formula
   sha256 "a84471733f86ac2c1240a6d28b705b05a6b79c3cca8835c3712efbdf813c5eb6"
 
   depends_on "stlinux-sh4-filesystem"
-  depends_on "stlinux-sh4-autoconf"
 
   patch :p1 do
     url "https://bitbucket.org/elkton/brew-patches/raw/master/stlinux-sh4-autoconf/autoconf-2.64-nodefault_path.patch"
@@ -41,9 +40,17 @@ class StlinuxSh4Autoconf < Formula
            "--with-local-prefix=#{stdir}"
     system "make"
     system "make install"
+
+    bin.install_symlink "#{stdir}/bin/sh4-linux-autoconf" => "sh4-linux-autoconf"
+    bin.install_symlink "#{stdir}/bin/sh4-linux-autoheader" => "sh4-linux-autoheader"
+    bin.install_symlink "#{stdir}/bin/sh4-linux-autom4te" => "sh4-linux-autom4te"
+    bin.install_symlink "#{stdir}/bin/sh4-linux-autoreconf" => "sh4-linux-autoreconf"
+    bin.install_symlink "#{stdir}/bin/sh4-linux-autoscan" => "sh4-linux-autoscan"
+    bin.install_symlink "#{stdir}/bin/sh4-linux-autoupdate" => "sh4-linux-autoupdate"
+    bin.install_symlink "#{stdir}/bin/sh4-linux-ifnames" => "sh4-linux-ifnames"
   end
 
   test do
-    system "stat #{stdir}/bin/autoconf"
+    system "stat #{stdir}/bin/sh4-linux-autoconf"
   end
 end

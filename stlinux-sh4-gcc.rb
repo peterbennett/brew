@@ -92,7 +92,7 @@ class StlinuxSh4Gcc < Formula
            "--with-local-prefix=#{stdir} " \
            "--with-sysroot=#{stdir}/target " \
            "--enable-target-optspace " \
-           "--enable-languages=c \c++ " \
+           "--enable-languages=c,c++ " \
            "--enable-threads=posix " \
            "--disable-libstdcxx-pch " \
            "--enable-nls " \
@@ -118,9 +118,36 @@ class StlinuxSh4Gcc < Formula
     system "cd ../gcc-obj; make all-gcc"
     system "cd ../gcc-obj; make"
     system "cd ../gcc-obj; make install"
+
+    bin.install_symlink "#{stdir}/bin/sh4-linux-cpp" => "sh4-linux-cpp"
+    bin.install_symlink "#{stdir}/bin/sh4-linux-gcc" => "sh4-linux-gcc"
+    bin.install_symlink "#{stdir}/bin/sh4-linux-gcc-ar" => "sh4-linux-gcc-ar"
+    bin.install_symlink "#{stdir}/bin/sh4-linux-gcc-nm" => "sh4-linux-gcc-nm"
+    bin.install_symlink "#{stdir}/bin/sh4-linux-gcc-ranlib" => "sh4-linux-gcc-ranlib"
+    bin.install_symlink "#{stdir}/bin/sh4-linux-gcc-4.8.3" => "sh4-linux-gcc-4.8.3"
+    bin.install_symlink "#{stdir}/bin/sh4-linux-c++" => "sh4-linux-c++"
+
   end
 
   test do
-    system "#{stdir}/bin/sh4-linux-gcc"
+    (testpath/"hello-c.c").write <<-EOS.undent
+      #include <stdio.h>
+      int main()
+      {
+        puts("Hello, world!");
+        return 0;
+      }
+    EOS
+    system "sh4-linux-gcc", "-o", "hello-c", "hello-c.c"
+
+    (testpath/"hello-cc.cc").write <<-EOS.undent
+      #include <iostream>
+      int main()
+      {
+        std::cout << "Hello, world!" << std::endl;
+        return 0;
+      }
+    EOS
+    system "sh4-linux-g++", "-o", "hello-cc", "hello-cc.cc"
   end
 end
