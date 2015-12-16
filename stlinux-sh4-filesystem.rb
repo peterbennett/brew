@@ -3,7 +3,7 @@ class StlinuxSh4Filesystem < Formula
   homepage "http://www.stlinux.com"
   url "https://bitbucket.org/elkton/brew/overview"
   version "1.0"
-  sha256 "3c0ea2080bb1014b56a44093741d6107f66f9db79e8d877b351abe20ad681be1"
+  sha256 "8cd3e0bb4d1d2cf5a008a301eb6e46b5d41f64ca1eceedabd92ad1284dc69c82"
 
   def stdir
     Pathname.new("#{HOMEBREW_PREFIX}/opt/STM/STLinux-2.4/devkit/sh4/")
