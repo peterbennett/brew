@@ -1,9 +1,9 @@
 class StlinuxArmv7Filesystem < Formula
   desc "This creates the opt location where all the other packages will be installed"
   homepage "http://www.stlinux.com"
-  url "https://bitbucket.org/elkton/brew/overview"
-  version "1.0"
-  sha256 "1ca438cea5862975631bdc61fdbec3767f88221306f295df81c98c160d82c823"
+  url "https://bitbucket.org/elkton/brew/raw/master/README.md"
+  version "1.1"
+  sha256 "2a5c96d678830a15e6bb30d62696bea724007a4594e9b6f194819f727c1e6e62"
 
   def stdir
     Pathname.new("#{HOMEBREW_PREFIX}/opt/STM/STLinux-2.4/devkit/armv7/")

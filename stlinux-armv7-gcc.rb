@@ -49,25 +49,52 @@ class StlinuxArmv7Gcc < Formula
   
   def install
     # GCC will suffer build errors if forced to use a particular linker.
-    ENV.delete "LD"
-    ENV.delete "CFLAGS"
-    ENV.delete "CXXFLAGS"
-    ENV.delete "LDFLAGS"
+    #ENV.delete "LD"
+    #ENV.delete "CFLAGS"
+    #ENV.delete "CXXFLAGS"
+    #Env.delete "LDFLAGS"
 
+    #mpr = Package["stlinux-armv7-mpc"]
+    #gmp = Package["stlinux-armv7-gmp"]
+    #mpfr = Package["stlinux-armv7-mpfr"]
+
+    ENV.append "CFLAGS", "-fbracket-depth=1024"
+    ENV.append "CXXFLAGS", "-fbracket-depth=1024"
+    #ENV["CC"]="gcc-4.8"
+    #ENV["CXX"]="g++-4.8"
+
+    ENV["LD_LIBRARY_PATH"] = "#{stdir}/lib"
+    ENV.prepend_path "PATH", "#{stdir}/bin"
+
+    #ENV["AS"]="armv7-linux-as"
+    #ENV["LD"]="armv7-linux-ld"
+    #ENV["AR"]="armv7-linux-ar"
+    #ENV["CC"]="armv7-linux-gcc"
+    #ENV["CXX"]="armv7-linux-g++"
+
+    ENV["AR_FOR_TARGET"] = "#{stdir}/bin/armv7-linux-ar"
+    ENV["LD_FOR_TARGET"] = "#{stdir}/bin/armv7-linux-ld"
+    ENV["OBJDUMP_FOR_TARGET"] = "#{stdir}/bin/armv7-linux-objdump"
+    ENV["NM_FOR_TARGET"] = "#{stdir}/bin/armv7-linux-nm"
+    ENV["RANLIB_FOR_TARGET"] = "#{stdir}/bin/armv7-linux-ranlib"
+    ENV["READELF_FOR_TARGET"] = "#{stdir}/bin/armv7-linux-readelf"
+    ENV["STRIP_FOR_TARGET"] = "#{stdir}/bin/armv7-linux-strip"
+    ENV["AS_FOR_TARGET"] = "#{stdir}/bin/armv7-linux-as"
+    
     system "#{stdir}/bin/armv7-linux-autoconf"
+    #system "autoconf"
     system "mkdir", "../gcc-obj"
     system "cd ../gcc-obj; ../gcc-4.8.3/configure " \
            "--build=#{arch}-apple-darwin#{osmajor} " \
            "--host=#{arch}-apple-darwin#{osmajor} " \
            "--target=arm-cortex-linux-gnueabi " \
            "--prefix=#{stdir} " \
+           "--exec-prefix=#{stdir} " \
            "--mandir=#{stdir}/share/man " \
            "--infodir=#{stdir}/share/info " \
            "--datadir=#{stdir}/share " \
            "--sysconfdir=#{stdir}/etc " \
            "--localstatedir=#{stdir}/var/lib " \
-           "--with-gmp=#{stdir} " \
-           "--with-mpfr=#{stdir} " \
            "--program-prefix=armv7-linux- " \
            "--with-local-prefix=#{stdir} " \
            "--with-sysroot=#{stdir}/target " \
@@ -91,15 +118,15 @@ class StlinuxArmv7Gcc < Formula
            "--with-mpfr=#{stdir} " \
            "--without-ppl " \
            "--enable-__cxa_atexit " \
-           "--disable-libsanitizer " \
            "--with-float=hard " \
            "--with-fp " \
            "--enable-cxx-flags=-mhard-float " \
+           "--disable-libsanitizer " \
            "--with-tls=gnu2 " \
            "--with-cpu=cortex-a9"
  
-    system "cd ../gcc-obj; make all-gcc"
-    system "cd ../gcc-obj; make"
+    system "cd ../gcc-obj; make all"
+    #system "cd ../gcc-obj; make"
     system "cd ../gcc-obj; make install"
     system "echo Hello > #{prefix}/a.file.brew.does.not.know"
     

@@ -25,23 +25,24 @@ class StlinuxArmv7Binutils < Formula
   
   def install
     system "./configure",
+           "--target=arm-cortex-linux-gnueabi",
+           "--prefix=#{stdir}",
+           "--mandir=#{stdir}/share/man",
+           "--infodir=#{stdir}/share/info",
+           "--datadir=#{stdir}/share",
+           "--sysconfdir=#{stdir}/etc",
+           "--localstatedir=#{stdir}/var/lib",
            "--enable-nls",
            "--disable-multilib",
            "--with-system-zlib",
+           "--with-float=hard",
            "--program-prefix=armv7-linux-",
            "--with-pkgversion=\"GNU Binutils - STMicroelectronics/Linux Base\"",
            "--with-bugurl=\"https://bitbucket.org/elkton/brew/issues\"",
            "--enable-install-libiberty",
            "--enable-install-libbfd",
            "--with-sysroot=#{stdir}/target",
-           "--target=armv7-linux",
-           "--disable-werror",
-           "--prefix=#{stdir}",
-           "--mandir=#{stdir}/share/man",
-           "--infodir=#{stdir}/share/info",
-           "--datadir=#{stdir}/share",
-           "--sysconfdir=#{stdir}/etc",
-           "--localstatedir=#{stdir}/var/lib"
+           "--disable-werror"
     system "make"
     system "make", "install"
 
