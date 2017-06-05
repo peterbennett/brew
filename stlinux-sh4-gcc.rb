@@ -118,7 +118,8 @@ class StlinuxSh4Gcc < Formula
     system "cd ../gcc-obj; make all-gcc"
     system "cd ../gcc-obj; make"
     system "cd ../gcc-obj; make install"
-
+    system "echo Hello > #{prefix}/a.file.brew.does.not.know"
+    
     # We can't install any symlinks, we could do with wrappers for
     # all those tools.    
   end

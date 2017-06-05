@@ -40,6 +40,7 @@ class StlinuxSh4Autoconf < Formula
            "--with-local-prefix=#{stdir}"
     system "make"
     system "make install"
+    system "echo Hello > #{prefix}/a.file.brew.does.not.know"
 
     bin.install_symlink "#{stdir}/bin/sh4-linux-autoconf" => "sh4-linux-autoconf"
     bin.install_symlink "#{stdir}/bin/sh4-linux-autoheader" => "sh4-linux-autoheader"

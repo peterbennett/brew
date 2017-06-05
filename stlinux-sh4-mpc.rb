@@ -28,6 +28,7 @@ class StlinuxSh4Mpc < Formula
            "--with-mpfr=#{stdir}"
     system "make"
     system "make", "install"
+    system "echo Hello > #{prefix}/a.file.brew.does.not.know"
   end
 
   test do

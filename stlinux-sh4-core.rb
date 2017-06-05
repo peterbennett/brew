@@ -14,6 +14,7 @@ class StlinuxSh4Core < Formula
   def install
     system "pushd ..; cp -prf target #{stdir}; popd"
     system "rm -rf #{stdir}/target/.brew_home"
+    system "echo Hello > #{prefix}/a.file.brew.does.not.know"
   end
 
   test do

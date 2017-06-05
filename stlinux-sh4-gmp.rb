@@ -24,6 +24,7 @@ class StlinuxSh4Gmp < Formula
            "--localstatedir=#{stdir}/var/lib"
     system "make"
     system "make", "install"
+    system "echo Hello > #{prefix}/a.file.brew.does.not.know"
   end
 
   test do

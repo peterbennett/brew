@@ -45,6 +45,7 @@ class StlinuxSh4Binutils < Formula
            "--localstatedir=#{stdir}/var/lib"
     system "make"
     system "make", "install"
+    system "echo Hello > #{prefix}/a.file.brew.does.not.know"
 
     bin.install_symlink "#{stdir}/bin/sh4-linux-objcopy" => "sh4-linux-objcopy"
     bin.install_symlink "#{stdir}/bin/sh4-linux-objdump" => "sh4-linux-objdump"
